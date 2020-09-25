@@ -33,6 +33,12 @@ $ratio: 375 / 10;
   align-items: flex-start;
 }
 
+@mixin down {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 @mixin right {
   display: flex;
   justify-content: flex-end;

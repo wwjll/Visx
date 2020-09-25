@@ -3,12 +3,16 @@ import { mapGetters, mapActions } from 'vuex'
 export const pageMixin = {
     computed: {
         ...mapGetters([
-            'offsetY'
+            'offsetY',
+            'device',
+            'displayWidth'
         ])
     },
     methods: {
         ...mapActions([
-            'setOffsetY'
+            'setOffsetY',
+            'setDevice',
+            'setDisplayWidth'
         ])
     }
 }

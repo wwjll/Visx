@@ -2,7 +2,6 @@
     <div 
         class="container"
         ref="container"
-        @mousemove.left="onMouseMove"
     >
     </div>
 </template>
@@ -17,15 +16,6 @@ import { objPath, mtlPath, texturePath, initialCameraPositionX,
 } from "../utils/contants"
 export default {
     name: "SceneLoader",
-    // watch: {
-    //     offSetY() {
-    //         if (this.offsetY > 0) {
-    //             console.log(this.offSetY)
-    //         } else {
-    //             console.log(this.offSetY)
-    //         }
-    //     }
-    // },
     methods:{
         initRenderer() {
             const container = this.$refs.container
@@ -84,10 +74,7 @@ export default {
         },
         init() {
             this.width = window.innerWidth || document.body.clientWidth
-            // this.width = document.body.clientWidth
             this.height = window.innerHeight
-            //  this.width = document.body.clientWidth
-            // this.height = document.body.clientHeight
             this.initRenderer()
             this.initSene()
             this.initCamera()
@@ -102,7 +89,6 @@ export default {
             // console.log(x, y)
             this.camera.position.set(initialCameraPositionX + x, initialCameraPositionY, initialCameraPositionZ - 2*x)
         }
-
     },
     beforeDestroy() {
         this.renderer = null
@@ -112,17 +98,26 @@ export default {
     },
     mounted() {
         this.init()
+        this.$on("resize", () => {
+            this.$nextTick(() => {
+                this.$refs.container.style.width = window.innerWidth
+                // TODO: renderer 重置大小后需要重新加载，否则内容会拉伸
+                this.camera.aspect = window.innerWidth / window.innerHeight
+                this.camera.updateProjectionMatrix()
+                this.renderer.setSize(window.innerWidth, window.innerHeight)
+            })
+        }) 
     }
 }
 </script>
 
 <style lang='scss' scoped>
-    .container {
-        width: 100%;
-        height: 100%;
-        background: blue;
-        position: fixed;
-        box-sizing: border-box;
-        left: 0;
-    }
+  .container {
+    width: 100%;
+    height: 100%;
+    background: blue;
+    position: fixed;
+    box-sizing: border-box;
+    left: 0;
+  }
 </style>

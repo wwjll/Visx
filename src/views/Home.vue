@@ -1,51 +1,23 @@
 <template>
   <div class="main">
-    <scene-loader></scene-loader>
-    <!-- <full-page ref="fullpage" 
-      :options="options" 
-      id="fullpage"
-      class="fullpage"
-    >
-      <div class="section" >
-        <div class="content">
-          SnXun Visx···
-        </div>
-      </div>
-      <div class="section">
-       <div class="content">
-          SnXun Visx···
-        </div>
-      </div>
-      <div class="section">
-        <div class="content">
-          SnXun Visx···
-        </div>
-      </div>
-    </full-page> -->
-</div>
+    <scene-loader ref="loader"></scene-loader>
+    <nav-bar/>
+    <div class="page1">
+
+    </div>
+  </div>
 </template>
 
 <script>
 import SceneLoader from "../components/SceneLoader"
+import NavBar from "../components/NavBar"
 import { pageMixin } from "../utils/mixin"
 export default {
   name: "Home",
   mixins: [ pageMixin ],
   components: {
-    SceneLoader
-  },
-  data() {
-    return {
-       options: {
-        // licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        menu: '#menu',
-        anchors: ['page1', 'page2', 'page3'],
-        sectionsColor: ['#ffffff', '#ffffff', '#ffffff']
-      },
-      camera: [
-
-      ]
-    }
+    SceneLoader,
+    NavBar
   },
   methods: {
     // 1 - 鼠标进入
@@ -92,10 +64,23 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('mousewheel', (e) => {
-      console.log(document.body.clientHeight, window.pageYOffset)
+    // window.addEventListener('mousewheel', (e) => {
+    //   console.log(document.body.clientHeight, window.pageYOffset)
+    // })
+    window.addEventListener("resize", () => {
+      // 重置 canvas 尺寸
+      if (this.$refs) {
+        if (this.$refs.loader) {
+          this.$refs.loader.$emit('resize')
+        }
+      }
+      // 判断当前屏幕是用移动方案还是 PC 方案
+      if (window.innerWidth < 650) {
+        this.setDevice('mobile')
+      } else {
+        this.setDevice('pc')
+      }
     })
-
   }
 }
 </script>
@@ -106,17 +91,10 @@ export default {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    // .fullpage {
-    //   // transform: translate3d(0, 100%, 0)!important;
-    //   .section {
-    //     opacity: 0.5!important;
-    //     .content {
-    //       padding: px2rem(100);
-    //       font-size: px2rem(200);
-    //       color: rgb(160, 86, 160);
-    //       text-align: center;
-    //     }
-    //   }  
-    // }
+  }
+  .page1 {
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
   }
 </style>

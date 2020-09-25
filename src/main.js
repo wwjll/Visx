@@ -4,8 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import './assets/styles/global.scss'
-// import VueFullPage from 'vue-fullpage.js'
-// Vue.use(VueFullPage);
+import './assets/styles/icon.css'
 
 Vue.config.productionTip = false;
 new Vue({

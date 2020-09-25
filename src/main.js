@@ -3,9 +3,11 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import './assets/styles/global.scss'
+// import VueFullPage from 'vue-fullpage.js'
+// Vue.use(VueFullPage);
 
 Vue.config.productionTip = false;
-
 new Vue({
   router,
   store,

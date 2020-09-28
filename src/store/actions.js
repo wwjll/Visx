@@ -5,9 +5,12 @@ const actions = {
     setDevice ({ commit }, device) {
         return commit('SET_DEVICE', device)
     },
-    setDisplayWidth({ commit }, displayWidth) {
-        return commit('SET_DISPLAY_WIDTH', displayWidth)
+    setNavBarVisible({ commit }, navBavVisible) {
+        return commit('SET_NAVBAR_VISIBLE', navBavVisible)
     },
+    setFullPageVisible({ commit }, fullPageVisible) {
+        return commit('SET_FULL_PAGE_VISIBLE', fullPageVisible)
+    }
 }
 
 export default actions

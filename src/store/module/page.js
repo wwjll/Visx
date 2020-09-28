@@ -2,7 +2,8 @@ const page = {
     state: {
       offsetY: 0,
       device: 'mobile',
-      displayWidth: window.innerWidth
+      navBarVisible: true,
+      fullPageVisible: false
     },
     mutations: {
       'SET_OFFSETY': (state, offsetY) => {
@@ -11,8 +12,11 @@ const page = {
       'SET_DEVICE': (state, device) => {
         state.device = device
       },
-      'SET_DISPLAY_WIDTH': (state, displayWidth) => {
-        state.displayWidth = displayWidth
+      'SET_NAVBAR_VISIBLE': (state, navBarVisible) => {
+        state.navBarVisible = navBarVisible
+      },
+      'SET_FULL_PAGE_VISIBLE': (state, fullPageVisible) => {
+        state.fullPageVisible = fullPageVisible
       }
     }
 }

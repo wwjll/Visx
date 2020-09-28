@@ -1,22 +1,12 @@
-<template>
-  <div class="navBar">
-      <div class="pc-menu" v-if="!mobileMenuVisible">
-        <div class="icon-wrapper">
-          <span class="icon-menu"></span>
-        </div>
-      </div>
-      <div class="mobie-menu" v-if="mobileMenuVisible">
-        <div class="mobile-menu-left">
+<template> 
+    <div class="navBar">
+      <transition name="slide-up">
+        <div class="pc-menu" v-if="show">
           <div class="icon-wrapper">
-            <span class="icon-more"></span>
+            <span class="icon-menu"></span>
           </div>
         </div>
-        <div class="mobile-menu-right">
-          <div class="icon-wrapper">
-            <span class="icon-down"></span>
-          </div>
-        </div>
-      </div>
+    </transition>     
   </div>
 </template>
 
@@ -26,18 +16,10 @@ export default {
   name: 'NavBar',
   mixins: [ pageMixin ],
   computed: {
-    mobileMenuVisible() {
-      return this.device === 'mobile' ? true : false 
+    show() {
+      let isPc = this.device === 'pc' ? true : false 
+      return isPc && this.navBarVisible
     }
-  },
-  data() {
-    return {
-      // mobileMenuVisible: false
-    }
-  },
-  mounted() {
-    
-    
   }
 }
 </script>
@@ -45,46 +27,23 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/styles/global";
   .navBar {
-    width: 100%;
+    width: 100vw;
     height: 100%;
     .pc-menu {
-      width: px2rem(200);
-      display: flex;
+      position: fixed;
+      width: px2rem(180);
+      height: px2rem(143);
       top: 0;
       right: 0;
-      @include down;
+      background-color: red;
+      @include center;
       .icon-wrapper {
-        width: 100%;
-        height: 40%;
-        font-size: 1.5rem;
+        font-size: px2rem(40);
         color: #ffffff;
         @include center;
       }
-      position: absolute;
-      width: 20%;
-      height: 15%;
-      background-color: red;
-      margin: 0;
     }
-    .mobie-menu {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      bottom: 0;
-      display: flex;
-      .mobile-menu-left {
-        width: 30%;
-        height: 100%;
-        background-color: red;
-        @include center;
-      }
-      .mobile-menu-right {
-        width: 70%;
-        height: 100%;
-        background-color: white;
-        @include center;
-      }
-    }
+  
   }
 
 </style>

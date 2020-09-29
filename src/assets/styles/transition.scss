@@ -6,30 +6,26 @@ $animationType: ease-out;
   animationTime: $animationTime;
 }
 
-.mobile-menu-slide-down-enter, .mobile-menu-slide-down-leave-to {
-  transform: translate3d(0, px2rem(40), 0)
+.mobile-nav-slide-down-enter, .mobile-nav-slide-down-leave-to, .full-page-slide-up-enter, .full-page-slide-up-leave-to {
+  transform: translate3d(0, 100%, 0)
 }
-.mobile-menu-slide-down-enter-to, .mobile-menu-slide-down-leave, .mask-slide-up-enter-to, .mask-slide-up-leave,
-.full-page-slide-up-enter-to, .full-page-slide-up-leave {
+.mobile-nav-slide-down-enter-to, .mobile-nav-slide-down-leave, .mask-slide-up-enter-to, .mask-slide-up-leave,
+.full-page-slide-up-enter-to, .full-page-slide-up-leave, slide-up-enter-to, slide-up-leave  {
   transform: translate3d(0, 0, 0)
 }
-.mobile-menu-slide-down-enter-active, .mobile-menu-slide-down-leave-active, .mask-slide-up-enter-active, 
-.mask-slide-up-leave-active, .full-page-slide-up-enter-active, .full-page-slide-up-leave-active, .popup-slide-up-enter-active,
-.popup-slide-up-leave-active {
+.mobile-nav-slide-down-enter-active, .mobile-nav-slide-down-leave-active, .mask-slide-up-enter-active, 
+.mask-slide-up-leave-active, .full-page-slide-up-enter-active, .full-page-slide-up-leave-active,
+slide-up-enter-active, slide-up-leave-active {
   transition: all $animationTime $animationType;
 }
 .mask-slide-up-enter, .mask-slide-up-leave-to {
   transform: translate3d(0, -150%, 0)
 }
-.full-page-slide-up-enter, .full-page-slide-up-leave-to {
-  transform: translate3d(0, 100%, 0)
+
+slide-up-enter, slide-up-leave-to {
+  transform: translate3d(0, -100%, 0)
 }
-.popup-slide-up-enter, .popup-slide-up-leave-to {
-  transform: translate3d(0, -100%, 0);
-}
-.popup-slide-up-enter-to, .popup-slide-up-leave {
-  transform: translate3d(0, 0, 0);
-}
+
 
 
 

@@ -97,14 +97,43 @@ $ratio: 375 / 10;
   align-items: flex-end;
 }
 
+@mixin animation($options: ()) {
+  
+  $options: map-merge((
+    animationName: animation,
+    duration: 1,
+    waitTime: 0,
+    timingFunction: linear,
+    iterationCount: infinite
+  ), $options);
 
-.icon {
-  color: #666;
-  font-size: px2rem(16);
-}
+  $name: map-get($options, animationName);
+  $kf: map-get($options, keyframes);
+  $kfLength: length($kf);
+  $duration: map-get($options, duration);
+  $waitTime: map-get($options, waitTime);
+  $timingFunction: map-get($options, timingFunction);
+  $iterationCount: map-get($options, iterationCount);
+  $counter: 1; 
 
-.title {
-  color: #666;
-  font-size: px2rem(16);
-  font-weight: bold;
+  @keyframes #{$name} {
+    @each $frame, $prop in $kf {
+      #{$frame * $duration / ($duration + $waitTime)} {
+        @each $k, $v in $prop {
+          #{$k}: #{$v}
+        }
+      }
+      // if last in loop and waitTime is not 0, add the last frame as 100% (this is what creates the pause)
+      @if $counter == $kfLength and $waitTime > 0 {
+        100% {
+          @each $k, $v in $prop {
+            #{$k}: #{$v}
+          }
+        }
+      }
+      $counter: $counter+1;
+    }
+  }
+
+  animation: #{$name} #{$duration}s #{$timingFunction} #{$iterationCount};
 }

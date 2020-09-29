@@ -118,7 +118,7 @@ $ratio: 375 / 10;
 
   @keyframes #{$name} {
     @each $frame, $prop in $kf {
-      #{$frame * $duration / ($duration + $waitTime)} {
+      #{$frame * $duration / ($duration + $waitTime)}#{'%'} {
         @each $k, $v in $prop {
           #{$k}: #{$v}
         }

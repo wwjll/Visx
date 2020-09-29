@@ -1,5 +1,5 @@
 <template>
-  <div class="main" ref="main" @mousemove="onMouseMove">
+  <div ref="main" class="main" @mousemove="onMouseMove">
     <scene-loader ref="loader"></scene-loader>
     <complex-header></complex-header>
     <mask-page></mask-page>
@@ -8,38 +8,29 @@
 </template>
 
 <script>
-import SceneLoader from "../components/SceneLoader";
-import PrevNext from "../components/PrevNext";
-import ComplexHeader from "../components/Header";
-import MaskPage from "../components/MaskPage";
-import { pageMixin } from "../utils/mixin";
-import variable from "@/assets/styles/transition.scss";
+import SceneLoader from '../components/SceneLoader'
+import PrevNext from '../components/PrevNext'
+import ComplexHeader from '../components/Header'
+import MaskPage from '../components/MaskPage'
+import { pageMixin } from '../utils/mixin'
+import variable from '@/assets/styles/transition.scss'
 export default {
-  name: "Home",
-  mixins: [pageMixin],
+  name: 'Home',
   components: {
     SceneLoader,
     PrevNext,
     MaskPage,
     ComplexHeader
   },
+  mixins: [pageMixin],
   computed: {
     maskAnimTime() {
-      return parseFloat(variable.animationTime);
-    }
-  },
-  methods: {
-    onMouseMove(e) {
-      if (this.$refs) {
-        if (this.$refs.loader) {
-          this.$refs.loader.$emit("rotateScene", e);
-        }
-      }
+      return parseFloat(variable.animationTime)
     }
   },
   mounted() {
     // 这段逻辑用来处理滚动切换 mask 和 fullpage 组件
-    window.addEventListener("mousewheel", e => {
+    window.addEventListener('mousewheel', e => {
       // 当滚轮向下滚动并且 navBar 处于可见的时候
       if (e.deltaY > 0 && this.navBarVisible) {
         this.setNavBarVisible(false)
@@ -51,28 +42,36 @@ export default {
           // 由顶部向下时滚动条位置需要置顶
           window.scrollTo(0, 0)
         }, this.maskAnimTime * 1000)
-      }
-      // 当滚轮向上滚动并且 navBar 不可见的时候
-      else if (e.deltaY < 0 && !this.navBarVisible && window.pageYOffset === 0) {
-        this.setNavBarVisible(true);
+      } else if (e.deltaY < 0 && !this.navBarVisible && window.pageYOffset === 0) {
+        // 当滚轮向上滚动并且 navBar 不可见的时候
+        this.setNavBarVisible(true)
         if (this.maskTimer) {
-          clearTimeout(this.maskTimer);
+          clearTimeout(this.maskTimer)
         }
         this.maskTimer = setTimeout(() => {
-          this.setFullPageVisible(false);
-        }, this.maskAnimTime * 1000);
+          this.setFullPageVisible(false)
+        }, this.maskAnimTime * 1000)
       }
     })
     // 窗口尺寸变动触发
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       if (this.$refs) {
         if (this.$refs.loader) {
-          this.$refs.loader.$emit("resize");
+          this.$refs.loader.$emit('resize')
         }
       }
     })
+  },
+  methods: {
+    onMouseMove(e) {
+      if (this.$refs) {
+        if (this.$refs.loader) {
+          this.$refs.loader.$emit('rotateScene', e)
+        }
+      }
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

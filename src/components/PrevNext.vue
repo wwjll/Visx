@@ -1,24 +1,24 @@
-<template> 
+<template>
   <transition name="slide-up">
-    <div class="prev-next" v-if="this.navBarVisible">
+    <div v-if="this.navBarVisible" class="prev-next">
       <a href="" class="prev">
         <img src="/assets/images/arrow-next-white.svg" alt="left">
-        </a>
+      </a>
       <a href="" class="next">
-        <img src="/assets/images/arrow-next-white.svg" alt="right" >
-      </a> 
+        <img src="/assets/images/arrow-next-white.svg" alt="right">
+      </a>
     </div>
-  </transition>    
+  </transition>
 </template>
 
 <script>
-import { pageMixin } from "../utils/mixin"
+import { pageMixin } from '../utils/mixin'
 export default {
   name: 'PrevNext',
-  mixins: [ pageMixin ],
+  mixins: [pageMixin],
   computed: {
     show() {
-      let isPc = this.device === 'pc' ? true : false 
+      const isPc = this.device === 'pc'
       return isPc && this.navBarVisible
     }
   }
@@ -58,7 +58,7 @@ export default {
       img {
         width: 31px;
         height: 26px;
-      } 
+      }
     }
   }
 }

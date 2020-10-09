@@ -1,7 +1,3 @@
-<template>
-  <div ref="container" class="container"></div>
-</template>
-
 <script>
 import * as THREE from 'three'
 import * as TWEEN from 'tween'
@@ -14,6 +10,11 @@ import { pageMixin } from '../utils/mixin'
 export default {
   name: 'SceneLoader',
   mixins: [pageMixin],
+  data() {
+    return {
+      anim: true
+    }
+  },
   beforeDestroy() {
     this.renderer = null
     this.scene = null
@@ -49,31 +50,31 @@ export default {
   },
   methods: {
     initRenderer() {
-      const container = this.$refs.container
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(this.width, this.height)
       this.renderer.setClearColor(0x333333, 1.0)
-      container.appendChild(this.renderer.domElement)
+      this.renderer.domElement.classList.add('container')
+      document.body.appendChild(this.renderer.domElement)
     },
     initSene() {
       this.scene = new THREE.Scene()
       this.axes = new THREE.AxesHelper(20)
       this.scene.add(this.axes)
       // canvas 加载图片作为场景背景贴图
-      const canvas = document.createElement('canvas')
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      const context = canvas.getContext('2d')
-      const img = new Image()
-      img.src = '/assets/images/loader-cross-white-2x.png'
-      img.onload = () => {
-        context.fillStyle = context.createPattern(img, 'repeat')
-        context.fillRect(0, 0, window.innerWidth, window.innerHeight)
-        // 注意图片加载完成执行canvas相关方法后，要更新一下纹理
-        texture.needsUpdate = true
-      }
-      const texture = new THREE.Texture(canvas)
-      this.scene.background = texture
+      // const canvas = document.createElement('canvas')
+      // canvas.width = window.innerWidth
+      // canvas.height = window.innerHeight
+      // const context = canvas.getContext('2d')
+      // const img = new Image()
+      // img.src = '/assets/images/loader-cross-white-2x.png'
+      // img.onload = () => {
+      //   context.fillStyle = context.createPattern(img, 'repeat')
+      //   context.fillRect(0, 0, window.innerWidth, window.innerHeight)
+      //   // 注意图片加载完成执行canvas相关方法后，要更新一下纹理
+      //   texture.needsUpdate = true
+      // }
+      // const texture = new THREE.Texture(canvas)
+      // this.scene.background = texture
     },
     initCamera() {
       this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1000)
@@ -138,8 +139,9 @@ export default {
       this.initLoader()
       this.render()
       this.initTween()
-      this.introAnim()
-      window.scene = this.scene
+      // this.introAnim()
+      this.testRender()
+      window.camera = this.camera
     },
     initTween() {
       this.tweenGo = new TWEEN.Tween({ x: 0, y: 100, z: 0 })
@@ -161,6 +163,15 @@ export default {
       // 目前 Tweenjs 似乎没有暂停/继续功能
       this.introFrame = window.requestAnimationFrame(this.introAnim)
       TWEEN.update()
+    },
+    testRender() {
+      if (this.renderer) {
+        setTimeout(() => {
+          // const scale = 0.7
+          console.log(this.renderer.domElement.getContext('2d'))
+          // this.scene.scale.set(scale, scale, scale)
+        }, 3000)
+      }
     }
   }
 }
@@ -171,10 +182,10 @@ export default {
 .container {
   width: 100vw;
   height: 100%;
-  background: blue;
   position: fixed;
-  box-sizing: border-box;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
 }
 </style>

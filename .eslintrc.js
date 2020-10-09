@@ -30,6 +30,8 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
+    "vue/this-in-template": ["error", "always"],
+    "vue/valid-template-root": ["error", "never"],
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline":"off",
     "vue/name-property-casing": ["error", "PascalCase"],

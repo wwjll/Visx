@@ -1,5 +1,5 @@
 <template>
-  <div ref="main" class="main" @mousemove="onMouseMove">
+  <div ref="main" class="main" @mousemove="this.onMouseMove">
     <scene-loader ref="loader"></scene-loader>
     <complex-header></complex-header>
     <mask-page></mask-page>
@@ -77,8 +77,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/global";
 .main {
-  width: 100%;
-  height: 100%;
+  display: block;
   box-sizing: border-box;
 }
 </style>

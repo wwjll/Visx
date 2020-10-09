@@ -2,9 +2,7 @@
   <router-view />
 </template>
 
-
 <script>
-import { pageMixin } from "./utils/mixin"
 export default {}
 // DOM加载完毕后设置字体
 // document.addEventListener('DOMContentLoaded', () => {

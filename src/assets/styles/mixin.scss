@@ -98,7 +98,7 @@ $ratio: 375 / 10;
 }
 
 @mixin animation($options: ()) {
-  
+
   $options: map-merge((
     animationName: animation,
     duration: 1,
@@ -113,9 +113,10 @@ $ratio: 375 / 10;
   $duration: map-get($options, duration);
   $waitTime: map-get($options, waitTime);
   $timingFunction: map-get($options, timingFunction);
+  
   $iterationCount: map-get($options, iterationCount);
   $counter: 1; 
-
+  // 声明 keyframe 动画
   @keyframes #{$name} {
     @each $frame, $prop in $kf {
       #{$frame * $duration / ($duration + $waitTime)}#{'%'} {
@@ -134,6 +135,6 @@ $ratio: 375 / 10;
       $counter: $counter+1;
     }
   }
-
+  // 使用 keyframe 动画
   animation: #{$name} #{$duration}s #{$timingFunction} #{$iterationCount};
 }

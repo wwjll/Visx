@@ -1,10 +1,11 @@
+/* eslint-disable vue/this-in-template */
 <template>
   <div class="mask-page">
     <transition name="mask-slide-up">
-      <div class="mask-up" v-if="this.navBarVisible">
+      <div v-if="this.navBarVisible" class="mask-up">
         <div class="explore-wrapper">
           <p class="explore-text">
-            鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！           
+            鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！鸡你太美！
           </p>
           <div class="explore-btn">
             <span class="explore-btn-content">
@@ -16,21 +17,21 @@
       </div>
     </transition>
     <transition name="full-page-slide-up">
-      <div class="fullpage" v-if="this.fullPageVisible">
+      <div v-if="this.fullPageVisible" class="fullpage">
         <div class="section1"></div>
         <div class="section2"></div>
         <div class="section3"></div>
-        <slot/>
+        <slot />
       </div>
     </transition>
-  </div>    
+  </div>
 </template>
 
 <script>
-import { pageMixin } from "../utils/mixin"
+import { pageMixin } from '../utils/mixin'
 export default {
-    mixins: [ pageMixin ],
-    name: "MaskPage",
+  name: 'MaskPage',
+  mixins: [pageMixin]
 }
 </script>
 
@@ -40,14 +41,16 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
     .mask-up {
       position: fixed;
       display: block;
       width: 100vw;
       height: 100%;
       box-sizing: border-box;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       // 非移动端布局
       .explore-wrapper {
         position: absolute;
@@ -65,11 +68,11 @@ export default {
           max-width: 21em;
           box-sizing: border-box;
         }
-        .explore-btn {          
+        .explore-btn {
           width: 210px;
           height: 76px;
           background-color: #ff2b2b;
-          overflow: hidden;         
+          overflow: hidden;
           border-radius: 3px;
           .explore-btn-content {
             width: 100%;
@@ -101,14 +104,17 @@ export default {
           margin-left: 16.66667%;
           margin-top: 85vh;
           margin-bottom: 150px;
-          .explore-text {
-            color: #fff;
+          .text {
             font-size: 1rem;
+            color: #fff;
           }
-          .explore-btn {
-            display: none;
+          .icon {
+            width: 26px;
+            height: 28px;
+            margin-left: 4em;
+            color: #fff;
           }
-        }  
+        }
       }
     }
     .fullpage {

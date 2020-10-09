@@ -1,19 +1,20 @@
+/* eslint-disable vue/this-in-template */
 <template>
   <div class="header">
     <div class="main-logo">
       <a href="" class="logo-link">
         <img src="/assets/images/main-logo.png" alt="">
       </a>
-      <slot/>
+      <slot />
     </div>
-    <transition name="mobile-nav-slide-down">  
-      <div class="mobie-nav" v-if="this.navBarVisible">
+    <transition name="mobile-nav-slide-down">
+      <div v-if="this.navBarVisible" class="mobie-nav">
         <div class="mobile-prev-next">
           <a href="" class="prev">
             <img src="/assets/images/arrow-next-white.svg" alt="left">
           </a>
           <a href="" class="next">
-            <img src="/assets/images/arrow-next-white.svg" alt="left" >
+            <img src="/assets/images/arrow-next-white.svg" alt="left">
           </a>
         </div>
         <div class="explore">
@@ -23,18 +24,18 @@
           </span>
         </div>
       </div>
-    </transition> 
+    </transition>
   </div>
 </template>
 
 <script>
 // 该组件包含 logo 部分和移动导航栏部分
 // main-logo && mobile-nav
-import { pageMixin } from "../utils/mixin"
+import { pageMixin } from '../utils/mixin'
 
 export default {
-    name: 'ComplexHeader',
-    mixins: [ pageMixin ],
+  name: 'ComplexHeader',
+  mixins: [pageMixin]
 }
 </script>
 
@@ -59,7 +60,7 @@ export default {
       img {
         width: 41px;
         height: 41px;
-      }  
+      }
     }
   }
   @media screen and (max-width: 899px) {
@@ -70,7 +71,7 @@ export default {
       height: 85px;
       width: 100%;
       display: flex;
-      will-change: transform; 
+      will-change: transform;
       .mobile-prev-next {
         max-width: 180px;
         display: flex;
@@ -96,7 +97,7 @@ export default {
           height: 26px;
           // margin-bottom: 20px;
           @include center;
-          } 
+          }
         }
       }
       .explore {

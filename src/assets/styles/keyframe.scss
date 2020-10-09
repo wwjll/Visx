@@ -1,1 +1,30 @@
 @import "./mixin";
+
+.scene-slide-right {
+  @include animation(
+    (
+      animationName: right,
+      keyframes: (
+        10: (
+          transform: scale(0.7) translate3D(-30%, 30%, 0)
+        ),
+        40: (
+          transform: scale(0.7) translate3D(-130%, 30%, 0)
+        ),
+        70: (
+          transform: scale(0.7) translate3D(130%, 30%, 0)
+        ),
+        80: (
+          transform: scale(0.7) translate3D(40%, 30%, 0)
+        ),
+        100: (
+          transform: none,
+        )
+      ),
+      duration: 5,
+      waitTime: 0,
+      timingFunction: ease,
+      iterationCount: 5
+    )
+  );
+}
